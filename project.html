@@ -1,0 +1,823 @@
+<html class="dark text-[16px]">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: "Montserrat", sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: "#fffbeb",
+                            100: "#fef3c7",
+                            200: "#fde68a",
+                            300: "#fcd34d",
+                            400: "#fbbf24",
+                            500: "#f59e0b",
+                            600: "#d97706",
+                            700: "#b45309",
+                            800: "#92400e",
+                            900: "#78350f",
+                            950: "#451a03",
+                        },
+                    },
+                },
+                borderRadius: {
+                    sm: "0.125rem",
+                    DEFAULT: "0.125rem",
+                    md: "0.125rem",
+                    lg: "0.125rem",
+                    xl: "0.125rem",
+                    '2xl': "0.125rem",
+                    '3xl': "0.125rem",
+                    full: "0.125rem",
+                },
+            },
+            darkMode: "class",
+        };
+    </script>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
+    <div class="antialiased bg-gray-50 dark:bg-gray-900">
+        <nav
+            class="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+            <div class="flex flex-wrap justify-between items-center">
+                <div class="flex justify-start items-center">
+                    <button id="toggleSidebar" aria-expanded="true" aria-controls="sidebar"
+                        class="hidden p-2 mr-3 text-gray-600 rounded cursor-pointer lg:inline hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 16 12">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h14M1 6h14M1 11h7" />
+                        </svg>
+                    </button>
+                    <button aria-expanded="true" aria-controls="sidebar"
+                        class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer lg:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <svg class="w-[18px] h-[18px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                        <span class="sr-only">Toggle sidebar</span>
+                    </button>
+                    <a class="flex mr-4 cursor-pointer">
+                        <span
+                            class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TechFlow</span>
+                    </a>
+
+
+                    <form action="#" method="GET" class="hidden mb-0 lg:block lg:pl-2 ">
+                        <label for="topbar-search" class="sr-only">Search</label>
+                        <div class="relative mt-1 lg:w-96">
+                            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                            </div>
+                            <input type="text" name="email" id="topbar-search"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-9 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Search">
+                        </div>
+                    </form>
+
+
+                </div>
+
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul
+                        class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:border-gray-700">
+
+                        <li>
+                            <a class="cursor-pointer block py-2 px-3 text-white bg-primary-700 rounded md:bg-transparent md:text-gray-900 md:p-0 dark:text-white md:dark:text-white"
+                                aria-current="page">TechFlow Logo</a>
+                        </li>
+
+                        <li>
+                            <a class="cursor-pointer block py-2 px-3 text-white bg-primary-700 rounded md:bg-transparent md:text-gray-900 md:p-0 dark:text-white md:dark:text-white"
+                                aria-current="page">Home</a>
+                        </li>
+
+                        <li>
+                            <a class="cursor-pointer block py-2 px-3 text-white bg-primary-700 rounded md:bg-transparent md:text-gray-900 md:p-0 dark:text-white md:dark:text-white"
+                                aria-current="page">clients</a>
+                        </li>
+
+
+
+                        <li>
+                            <a class="cursor-pointer block py-2 px-3 text-white bg-primary-700 rounded md:bg-transparent md:text-gray-900 md:p-0 dark:text-white md:dark:text-white"
+                                aria-current="page">Admin</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="flex items-center lg:order-2">
+
+                    <button id="toggleSidebarMobileSearch" type="button"
+                        class="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <span class="sr-only">Search</span>
+                        <!-- Search icon -->
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </button>
+
+
+                    <!-- Notifications Button -->
+                    <div class="relative" id="notification-container">
+                        <button type="button" data-dropdown-toggle="notification-dropdown"
+                            class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                            <span class="sr-only">View notifications</span>
+                            <!-- Bell icon -->
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 14 20">
+                                <path
+                                    d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z" />
+                            </svg>
+                        </button>
+
+                        <!-- Notification Dropdown -->
+                        <div id="notification-dropdown"
+                            class="hidden absolute right-0 mt-0.9 bg-white dark:bg-gray-800 shadow-lg rounded-lg w-64">
+                            <ul>
+                                <li
+                                    class="p-4 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                                    Project Alpha has a new update</li>
+                                <li
+                                    class="p-4 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                                    Meeting with client X in 30 mins</li>
+                                <li
+                                    class="p-4 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                                    <a href="./notification.html">All Notifications</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="button"
+                        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                        id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+                        <a href="./userprofile.html">
+                            <img class="w-8 h-8 rounded-full"
+                                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg"
+                                alt="Img">
+                        </a>
+                    </button>
+
+                    <button id="theme-toggle" type="button"
+                        class="p-2 text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <!-- Moon Icon for Dark Mode -->
+                        <i id="theme-toggle-dark-icon" class="ri-moon-clear-line hidden text-xl"></i>
+
+                        <!-- Sun Icon for Light Mode -->
+                        <i id="theme-toggle-light-icon" class="ri-sun-line hidden text-xl"></i>
+                    </button>
+
+
+
+                </div>
+            </div>
+        </nav>
+
+
+        <aside
+            class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+            aria-label="Sidenav" id="drawer-navigation">
+            <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
+                <ul class="space-y-2 font-medium">
+
+                    <li>
+                        <a href="./dashboard.html"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M19 5v2h-4V5h4M9 5v6H5V5h4m10 8v6h-4v-6h4M9 17v2H5v-2h4M21 3h-8v6h8V3zM11 3H3v10h8V3zm10 8h-8v10h8V11zm-10 4H3v6h8v-6z" />
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./project.html"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="m9.17 6 2 2H20v10H4V6h5.17M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" />
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Projects</span>
+
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./task.html"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M11 7h6v2h-6zm0 4h6v2h-6zm0 4h6v2h-6zM7 7h2v2H7zm0 4h2v2H7zm0 4h2v2H7zM20.1 3H3.9c-.5 0-.9.4-.9.9v16.2c0 .4.4.9.9.9h16.2c.4 0 .9-.5.9-.9V3.9c0-.5-.5-.9-.9-.9zM19 19H5V5h14v14z" />
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Tasks</span>
+
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./team.html"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M9 13.75c-2.34 0-7 1.17-7 3.5V19h14v-1.75c0-2.33-4.66-3.5-7-3.5zM4.34 17c.84-.58 2.87-1.25 4.66-1.25s3.82.67 4.66 1.25H4.34zM9 12c1.93 0 3.5-1.57 3.5-3.5S10.93 5 9 5 5.5 6.57 5.5 8.5 7.07 12 9 12zm0-5c.83 0 1.5.67 1.5 1.5S9.83 10 9 10s-1.5-.67-1.5-1.5S8.17 7 9 7zm7.04 6.81c1.16.84 1.96 1.96 1.96 3.44V19h4v-1.75c0-2.02-3.5-3.17-5.96-3.44zM15 12c1.93 0 3.5-1.57 3.5-3.5S16.93 5 15 5c-.54 0-1.04.13-1.5.35.63.89 1 1.98 1 3.15s-.37 2.26-1 3.15c.46.22.96.35 1.5.35z" />
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Team Collaboration</span>
+
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./report.html"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Reports</span>
+
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="./settingspanel.html"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
+                            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.488.488 0 0 0 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1a.566.566 0 0 0-.18-.03c-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46a.5.5 0 0 0 .61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Settings</span>
+
+
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </aside>
+        <main class="p-4 pt-20 md:ml-64 h-auto space-y-8">
+            <div class="p-4 gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-semibold text-gray-900 dark:text-white">To Do</h2>
+                        <button
+                            class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ease-in-out">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="4"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 gap-4 flex flex-col shadow">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-900 dark:text-white">Quality Assurance Testing</h3>
+                            <button
+                                class="p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ease-in-out">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="dark:hidden sm:block w-full">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"
+                                alt="Img" class="m-auto" />
+                        </div>
+                        <div class="hidden dark:block sm:dark:block w-full">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"
+                                alt="Img" class="m-auto" />
+                        </div>
+
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Perform thorough testing to ensure product quality
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="overflow-hidden flex md:text-center text-left">
+
+                                <img class="border-[1px] border-white dark:border-gray-800 rounded-full w-6 h-6 inline-block "
+                                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg"
+                                    alt="Img" />
+
+
+                            </div>
+                            <span
+                                class="flex items-center px-2.5 py-0.5 rounded-md gap-1 text-sm font-medium bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-300">
+                                <svg class="w-3 h-3 text-green-800 dark:text-green-300" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Today
+                            </span>
+                        </div>
+                    </div>
+                    <!-- btn -->
+                    <button
+                        class="group p-4 rounded-lg gap-2 flex items-center bg-gray-100 justify-center border-[1px] border-dashed border-gray-300 font-medium text-gray-500 hover:bg-primary-200 hover:text-primary-700 hover:border-primary-700 dark:bg-gray-800 dark:text-gray-400 transition-colors ease-in-out dark:hover:bg-primary-500 dark:hover:text-primary-300 dark:hover:border-primary-300">
+                        <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-primary-700 dark:text-gray-400 dark:group-hover:text-gray-400"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14m-7 7V5" />
+                        </svg>
+                        Add new card
+                    </button>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-semibold text-gray-900 dark:text-white">In Progress</h2>
+                        <button
+                            class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ease-in-out">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="4"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 gap-4 flex flex-col shadow">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-900 dark:text-white">Develop Homepage Design</h3>
+                            <button
+                                class="p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ease-in-out">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="dark:hidden sm:block w-full">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"
+                                alt="Img" class="m-auto" />
+                        </div>
+                        <div class="hidden dark:block sm:dark:block w-full">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/default-placeholder.png"
+                                alt="Img" class="m-auto" />
+                        </div>
+
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Design a modern and user-friendly homepage for the website
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="overflow-hidden flex md:text-center text-left">
+
+                                <img class="border-[1px] border-white dark:border-gray-800 rounded-full w-6 h-6 inline-block "
+                                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg"
+                                    alt="Img" />
+
+                                <img class="border-[1px] border-white dark:border-gray-800 rounded-full w-6 h-6 inline-block -ml-2"
+                                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg"
+                                    alt="Img" />
+
+
+                            </div>
+                            <span
+                                class="flex items-center px-2.5 py-0.5 rounded-md gap-1 text-sm font-medium bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-300">
+                                <svg class="w-3 h-3 text-green-800 dark:text-green-300" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                10 days left
+                            </span>
+                        </div>
+                    </div>
+                    <!-- btn -->
+                    <button
+                        class="group p-4 rounded-lg gap-2 flex items-center bg-gray-100 justify-center border-[1px] border-dashed border-gray-300 font-medium text-gray-500 hover:bg-primary-200 hover:text-primary-700 hover:border-primary-700 dark:bg-gray-800 dark:text-gray-400 transition-colors ease-in-out dark:hover:bg-primary-500 dark:hover:text-primary-300 dark:hover:border-primary-300">
+                        <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-primary-700 dark:text-gray-400 dark:group-hover:text-gray-400"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14m-7 7V5" />
+                        </svg>
+                        Add new card
+                    </button>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-semibold text-gray-900 dark:text-white">Done</h2>
+                        <button
+                            class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ease-in-out">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="4"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 gap-4 flex flex-col shadow">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-semibold text-gray-900 dark:text-white">Backend Development</h3>
+                            <button
+                                class="p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ease-in-out">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Build the backend functionality of the platform
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="overflow-hidden flex md:text-center text-left">
+
+                                <img class="border-[1px] border-white dark:border-gray-800 rounded-full w-6 h-6 inline-block "
+                                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg"
+                                    alt="Img" />
+
+                                <img class="border-[1px] border-white dark:border-gray-800 rounded-full w-6 h-6 inline-block -ml-2"
+                                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                                    alt="Img" />
+
+                                <img class="border-[1px] border-white dark:border-gray-800 rounded-full w-6 h-6 inline-block -ml-2"
+                                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg"
+                                    alt="Img" />
+
+
+                            </div>
+                            <span
+                                class="flex items-center px-2.5 py-0.5 rounded-md gap-1 text-sm font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300">
+                                <svg class="w-3 h-3 text-yellow-800 dark:text-yellow-300" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Tomorrow
+                            </span>
+                        </div>
+                    </div>
+                    <!-- btn -->
+                    <button
+                        class="group p-4 rounded-lg gap-2 flex items-center bg-gray-100 justify-center border-[1px] border-dashed border-gray-300 font-medium text-gray-500 hover:bg-primary-200 hover:text-primary-700 hover:border-primary-700 dark:bg-gray-800 dark:text-gray-400 transition-colors ease-in-out dark:hover:bg-primary-500 dark:hover:text-primary-300 dark:hover:border-primary-300">
+                        <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-primary-700 dark:text-gray-400 dark:group-hover:text-gray-400"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14m-7 7V5" />
+                        </svg>
+                        Add new card
+                    </button>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="font-semibold text-gray-900 dark:text-white">
+                            Add another group
+                        </h2>
+                        <button
+                            class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors ease">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="4"
+                                    d="M12 6h.01M12 12h.01M12 18h.01" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- btn -->
+                    <button
+                        class="group h-36 p-4 rounded-lg gap-2 flex items-center bg-gray-100 justify-center border-[1px] border-dashed border-gray-300 font-medium text-gray-500 hover:bg-primary-200 hover:text-primary-700 hover:border-primary-700 dark:bg-gray-800 dark:text-gray-400 transition-colors ease-in-out dark:hover:bg-primary-500 dark:hover:text-primary-300 dark:hover:border-primary-300">
+                        <svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-primary-700 dark:text-gray-400 dark:group-hover:text-gray-400"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                d="M5 12h14m-7 7V5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
+                <div class="mx-auto w-full">
+                    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                        <form class="w-full mx-auto p-5 space-y-5">
+                            <div>
+                                <label for="Project Name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project
+                                    Name</label>
+                                <input type="text" id="Project Name"
+                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    required />
+                            </div>
+                            <div class="mt-5">
+                                <label for="Project Description"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project
+                                    Description</label>
+                                <textarea id="Project Description" rows="4"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="Type here..."></textarea>
+                            </div>
+                            <div>
+                                <label
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
+                                <ul class="grid w-full gap-6 md:grid-cols-2">
+
+
+                                    <li>
+                                        <input type="radio" id="High" name="hosting" value="High" class="hidden peer"
+                                            required />
+                                        <label for="High"
+                                            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <div class="block">
+                                                <div class="w-full text-lg font-semibold">High</div>
+
+                                            </div>
+                                        </label>
+                                    </li>
+
+                                    <li>
+                                        <input type="radio" id="Medium" name="hosting" value="Medium"
+                                            class="hidden peer" required />
+                                        <label for="Medium"
+                                            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <div class="block">
+                                                <div class="w-full text-lg font-semibold">Medium</div>
+
+                                            </div>
+                                        </label>
+                                    </li>
+
+                                    <li>
+                                        <input type="radio" id="Low" name="hosting" value="Low" class="hidden peer"
+                                            required />
+                                        <label for="Low"
+                                            class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                            <div class="block">
+                                                <div class="w-full text-lg font-semibold">Low</div>
+
+                                            </div>
+                                        </label>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Assign Team
+                                    Members</label>
+                                <ul
+                                    class="items-center sm:flex mt:0 w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white mt-0">
+
+
+                                    <li class="border-gray-200 dark:border-gray-600 
+                              w-full border-b 
+                              sm:border-r">
+                                        <div class="flex items-center ps-3">
+                                            <input id="John Doe" type="checkbox" value=""
+                                                class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="John Doe"
+                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">John
+                                                Doe</label>
+                                        </div>
+                                    </li>
+
+                                    <li class="border-gray-200 dark:border-gray-600 
+                              w-full border-b 
+                              sm:border-r">
+                                        <div class="flex items-center ps-3">
+                                            <input id="Jane Smith" type="checkbox" value=""
+                                                class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="Jane Smith"
+                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jane
+                                                Smith</label>
+                                        </div>
+                                    </li>
+
+                                    <li class="border-gray-200 dark:border-gray-600 
+                              w-full !border-b-0 
+                              ">
+                                        <div class="flex items-center ps-3">
+                                            <input id="Mike Johnson" type="checkbox" value=""
+                                                class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="Mike Johnson"
+                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mike
+                                                Johnson</label>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="Upload Project Files">Upload Project Files</label>
+                                <input
+                                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400"
+                                    aria-describedby="Upload Project Files_help" id="Upload Project Files" type="file">
+                                <div class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                                    id="Upload Project Files_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</div>
+                            </div>
+                            <button type="submit"
+                                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
+                <div class="mx-auto w-full">
+                    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                        <form class="w-full mx-auto p-5 space-y-5">
+                            <div>
+                                <label for="Team Name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Team
+                                    Name</label>
+                                <input type="text" id="Team Name"
+                                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    required />
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Team
+                                    Members</label>
+                                <ul
+                                    class="items-center sm:flex mt:0 w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white mt-0">
+
+
+                                    <li class="border-gray-200 dark:border-gray-600 
+                              w-full border-b 
+                              sm:border-r">
+                                        <div class="flex items-center ps-3">
+                                            <input id="Member 1" type="checkbox" value=""
+                                                class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="Member 1"
+                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Member
+                                                1</label>
+                                        </div>
+                                    </li>
+
+                                    <li class="border-gray-200 dark:border-gray-600 
+                              w-full border-b 
+                              sm:border-r">
+                                        <div class="flex items-center ps-3">
+                                            <input id="Member 2" type="checkbox" value=""
+                                                class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="Member 2"
+                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Member
+                                                2</label>
+                                        </div>
+                                    </li>
+
+                                    <li class="border-gray-200 dark:border-gray-600 
+                              w-full !border-b-0 
+                              ">
+                                        <div class="flex items-center ps-3">
+                                            <input id="Member 3" type="checkbox" value=""
+                                                class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="Member 3"
+                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Member
+                                                3</label>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="Confirm Team Creation" type="checkbox" value=""
+                                        class="w-4 h-4 border border-gray-300 rounded bg-white focus:ring-3 focus:ring-primary-300 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                                        required />
+                                </div>
+                                <label for="Confirm Team Creation"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirm Team
+                                    Creation</label>
+                            </div>
+                            <button type="submit"
+                                class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Initialize the icons based on the current theme
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            darkIcon.classList.remove('hidden');
+        } else {
+            lightIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('theme')) {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        });
+
+        const notificationContainer = document.getElementById('notification-container');
+        const dropdown = document.getElementById('notification-dropdown');
+
+        notificationContainer.addEventListener('mouseenter', function () {
+            dropdown.classList.remove('hidden');  // Show dropdown on hover
+        });
+
+        notificationContainer.addEventListener('mouseleave', function () {
+            dropdown.classList.add('hidden');  // Hide dropdown when mouse leaves
+        });
+
+
+    </script>
+</body>
+
+</html>
